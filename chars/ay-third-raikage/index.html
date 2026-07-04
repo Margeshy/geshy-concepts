@@ -849,6 +849,52 @@
       height: auto;
     }
 
+    .combo-panel {
+      margin-top: 12px;
+      padding: 22px 25px;
+      min-height: 210px;
+    }
+
+    .combo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+      min-height: 160px;
+    }
+
+    .combo-column {
+      position: relative;
+      min-width: 0;
+    }
+
+    .combo-title {
+      display: inline-block;
+      width: fit-content;
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 400;
+      text-transform: uppercase;
+      font-size: clamp(1.15rem, 2.2vw, 1.85rem);
+      line-height: 1.4;
+      letter-spacing: 0.08em;
+    }
+
+    .combo-title-bnb {
+      color: #34e86a;
+    }
+
+    .combo-title-medium {
+      color: #f0cf5c;
+    }
+
+    .combo-copy {
+      margin: 18px 0 0;
+      color: #d7d7d7;
+      font-size: 1.48rem;
+      line-height: 1.45;
+      letter-spacing: 0.015em;
+    }
+
     .footer-strip {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -955,6 +1001,11 @@
         border-top: 0;
       }
 
+      .combo-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
       .footer-strip {
         grid-template-columns: 1fr;
       }
@@ -1040,13 +1091,13 @@
             <h3 class="move-title">[1] Lightning Cloak</h3>
             <img class="tier-icon" src="assets/pixel-hands/three-finger-perfectpixel.png" alt="Three Finger tier icon">
           </div>
-          <p class="move-body">Ay channels chakra into a cloak of lightning while a bolt crashes down on his position to punish nearby enemies. It grants faster movement and teleport dashes for 20 seconds. During <span class="inline-base">Lightning Cloak</span>, <span class="inline-base">Hell Thrust</span> is empowered from Block Breaker to Block Bypass.<br><br>If activated during <span class="inline-base">Endure</span> this becomes <span class="inline-mode">Kuroi</span>, where Ay surges black lightning through his body, sending it outwards in a violent burst.</p>
+          <p class="move-body">Ay channels chakra into a cloak of lightning while a bolt crashes down on his position to punish nearby enemies. It grants faster movement and teleport dashes for 20 seconds.<br><br>If the opponent is higher mid-air than Ay when the bolt hits them, they'll be knocked down to start a combo.<br><br>During <span class="inline-base">Lightning Cloak</span>, Ay is empowered by getting closer to the opponent. See <span class="inline-base">Hell Thrust</span>/<span class="inline-base">Hell Wave</span>.<br><br>If activated during <span class="inline-base">Endure</span> this becomes <span class="inline-mode">Kuroi</span>, where Ay surges black lightning through his body, sending it outwards in a violent burst. Ends <span class="inline-base">Lightning Cloak</span> on use.</p>
         </div>
         <div class="move-cell detail-block">
           <div class="tier-header">
             <h4 class="detail-title">Notes</h4>
           </div>
-          <p class="note-properties">Properties: AOE, Buff, Super Armor</p>
+          <p class="note-properties">Properties: AOE, Combo Starter, Combo Extender, Buff, Super Armor</p>
           <p class="note-copy">This move is supposed to be near instantly applied. Though since it has Super Armor it could be cancelled (somehow)<br>As you can tell, <span class="inline-mode">Kuroi</span> is not canon in any media, I made it from creative liberty considering Ay was the inventor of black lightning chakra. So just for funsies!</p>
         </div>
       </article>
@@ -1068,7 +1119,7 @@
               <h3 class="variant-title">[2] Hell Thrust</h3>
               <img class="tier-icon" src="assets/pixel-hands/two-finger-perfectpixel.png" alt="Two Finger tier icon">
             </div>
-            <p class="move-body">Ay holds his hand out to the side and starts freely sprinting. On contact with an opponent, Ay lunges past them, damaging and crumpling them.<br>Can't be used mid-air, or in combo.</p>
+            <p class="move-body">Ay holds his hand out to the side and starts freely sprinting. On contact with an opponent, Ay lunges past them, damaging and launching them.<br>Can't be used mid-air. In combo launches.<br><br>If <span class="inline-base">Lightning Cloak</span> is active and Ay is near the opponent when used, <span class="inline-base">Hell Thrust</span> improves to crumpling and combo starting.</p>
           </div>
         </div>
         <div class="move-cell detail-block">
@@ -1078,7 +1129,7 @@
           <p class="note-properties">Properties: Combo Starter, Knockback, Wall Bounce</p>
           <p class="note-copy">His main tool for getting close. It would have a medium cd, not too low or too high</p>
           <div class="variant-notes" data-align-to="hell-thrust">
-            <p class="note-properties">Properties: Free Movement Grab, Stagger, Combo Starter, Block Breaker/Bypass (<span class="inline-base">Lightning Cloak</span>)</p>
+            <p class="note-properties">Properties: Free Movement Grab, Launcher / Stagger, Combo Starter, Block Breaker</p>
             <p class="note-copy">Would have high damage<br>Attack's a bit op but I believe it's fine with the start up and the distance needed covered</p>
           </div>
         </div>
@@ -1101,7 +1152,7 @@
               <h3 class="variant-title">[3] Hell Wave</h3>
               <img class="tier-icon" src="assets/pixel-hands/two-finger-perfectpixel.png" alt="Two Finger tier icon">
             </div>
-            <p class="move-body">Ay slings his hand across to send forward a giant blast of air, ragdolling opponents. Can be used after M1 finishers.<br><br>If held, Ay focuses his chakra to send forward a slice of air. It travels while launching enemies for higher damage and can break block.</p>
+            <p class="move-body">Ay slings his hand across to send forward a giant blast of air, ragdolling opponents. Can be used after M1 finishers.<br><br>If held, Ay focuses his chakra to send forward a slice of air. It travels while launching enemies for higher damage and can break block.<br><br>Both versions can be used mid-air.<br><br>During <span class="inline-base">Lightning Cloak</span>, <span class="inline-base">Hell Wave</span> crumples enemies hit close to Ay instead of ragdolling them.</p>
           </div>
         </div>
         <div class="move-cell detail-block">
@@ -1127,13 +1178,13 @@
             <h3 class="move-title">[4] Endure</h3>
             <img class="tier-icon" src="assets/pixel-hands/four-finger-perfectpixel.png" alt="Four Finger tier icon">
           </div>
-          <p class="move-body">Ay braces himself to tank incoming attacks. Damage will not be reduced, but he can't get grabbed or interrupted.<br>Towards the end, movement can be inputted before the effects end.<br>If <span class="inline-base">Lightning Cloak</span> is used during this, the combination becomes <span class="inline-mode">Kuroi</span>.</p>
+          <p class="move-body">Ay braces himself to tank incoming attacks. Damage will not be reduced, but he can't get grabbed or interrupted.<br>Towards the end, movement can be inputted before the effects end.<br><br>If <span class="inline-base">Lightning Cloak</span> is used during this, the combination becomes <span class="inline-mode">Kuroi</span>.</p>
         </div>
         <div class="move-cell detail-block">
           <div class="tier-header">
             <h4 class="detail-title">Notes</h4>
           </div>
-          <p class="note-properties">Properties: Ultra Armor, Buff</p>
+          <p class="note-properties">Properties: Impervious</p>
           <p class="note-copy">Better not hit him!</p>
         </div>
       </article>
@@ -1149,16 +1200,36 @@
             <h3 class="move-title">[G] Hell Stab</h3>
             <img class="tier-icon" src="assets/pixel-hands/one-finger-perfectpixel.png" alt="One Finger tier icon">
           </div>
-          <p class="move-body">Ay stomps the ground, spiking the ground forward and launching the opponent up on hit. He dashes forward with his One Finger Nukite and catches the opponent as they fall down, going past them. The amount of chakra and intensity of it creates an outburst of lightning chakra to damage the opponent and anyone nearby.</p>
+          <p class="move-body">Ay stomps the ground, spiking it forward and launching the opponent up on hit. He dashes forward with his One Finger Nukite and catches the opponent as they fall down, going past them. The amount of chakra and intensity of it creates an outburst of lightning chakra to damage anyone nearby.</p>
         </div>
         <div class="move-cell detail-block">
           <div class="tier-header">
             <h4 class="detail-title">Notes</h4>
           </div>
           <p class="note-properties">Properties: Ultimate, Block Bypass, Ranged Grab, AOE, Hyper Armor</p>
-          <p class="note-copy">Replacing awakening. This cuts straight to ultimate, around 50 dmg I'd say.<br>Couldn't decide between Super or Hyper Armor, but I think Hyper is fine, Super would be too weak</p>
+          <p class="note-copy">Replacing awakening. This cuts straight to ultimate, around 50 dmg I'd say.<br>Longish startup to detect and counter.<br>Couldn't decide between Super or Hyper Armor, but I think Hyper is fine, Super would be too weak</p>
         </div>
       </article>
+    </section>
+
+    <h2 class="section-heading">Combos</h2>
+    <section class="combo-panel pixel-panel">
+      <div class="combo-grid">
+        <article class="combo-column move-cell">
+          <h3 class="combo-title combo-title-bnb">BNB</h3>
+          <p class="combo-copy">&gt;2 <span class="inline-base">Nukite</span>: <span class="inline-base">Impale</span> -&gt; Downslam -&gt; <span class="inline-base">Cross</span> -&gt; <span class="inline-base">Lightning Cloak</span> (Bolt) or <span class="inline-mode">Kuroi</span><br><br>&lt;2 <span class="inline-base">Nukite</span>: <span class="inline-base">Hell Thrust</span> -&gt; Downslam -&gt; <span class="inline-base">Hell Wave</span> -&gt; <span class="inline-base">Lightning Cloak</span> (Bolt) or <span class="inline-mode">Kuroi</span></p>
+        </article>
+        <article class="combo-column combo-column-medium move-cell">
+          <h3 class="combo-title combo-title-medium">Medium</h3>
+          <p class="combo-copy">&gt;2 <span class="inline-base">Nukite</span>: Upfling -&gt; <span class="inline-base">Lightning Cloak</span> (Bolt) -&gt; Downslam -&gt; <span class="inline-base">Cross</span> -&gt; Kickaway -&gt; <span class="inline-base">Impale</span><br><br>&lt;2 <span class="inline-base">Nukite</span>: Upfling -&gt; <span class="inline-base">Hell Wave</span> (aim at opponent) -&gt; <span class="inline-base">Lightning Cloak</span> (Bolt) -&gt; Finisher -&gt; <span class="inline-base">Hell Thrust</span></p>
+        </article>
+        <div class="move-cell detail-block">
+          <div class="tier-header">
+            <h4 class="detail-title">Notes</h4>
+          </div>
+          <p class="note-copy">BNB would deal ~80 dmg max, meaning it's on the low side.<br><br>Medium would deal ~90 dmg.</p>
+        </div>
+      </div>
     </section>
 
     <h2 class="section-heading">Closing Notes</h2>
