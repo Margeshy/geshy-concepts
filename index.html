@@ -19,9 +19,7 @@
       --font-body: "VT323", "Lucida Console", "Courier New", monospace;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html,
     body {
@@ -55,12 +53,13 @@
     }
 
     .intro {
-      margin-bottom: 20px;
+      margin-bottom: 26px;
       padding: 25px;
     }
 
     h1,
-    h2 {
+    h2,
+    .game-title {
       margin: 0;
       color: var(--text);
       font-family: var(--font-display);
@@ -70,20 +69,33 @@
       text-transform: uppercase;
     }
 
-    h1 {
-      font-size: clamp(1.4rem, 3vw, 2.3rem);
+    h1 { font-size: clamp(1.4rem, 3vw, 2.3rem); }
+    h2 { font-size: 1rem; }
+
+    .game-section + .game-section { margin-top: 28px; }
+
+    .game-title {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 18px;
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
     }
 
-    h2 {
-      font-size: 1rem;
+    .game-title::before,
+    .game-title::after {
+      content: "";
+      height: 2px;
+      background: var(--border);
     }
 
     .intro p,
     .card-copy p,
     .meta-chip,
-    .empty-state {
-      color: var(--muted);
-    }
+    .empty-state { color: var(--muted); }
 
     .intro p {
       max-width: 900px;
@@ -127,9 +139,7 @@
       image-rendering: pixelated;
     }
 
-    .card-copy {
-      padding: 18px 20px 20px;
-    }
+    .card-copy { padding: 18px 20px 20px; }
 
     .card-copy p {
       margin: 10px 0 0;
@@ -158,26 +168,12 @@
       margin: 10px 0 0;
     }
 
-    .character-card .currency-dollar {
-      color: #71d66d;
-    }
-
+    .character-card .currency-dollar { color: #71d66d; }
     .character-card .currency-token,
-    .character-card .star-filled {
-      color: #f0cf5c;
-    }
-
-    .character-card .archetype-value {
-      color: #d95e5e;
-    }
-
-    .character-card .archetype-separator {
-      color: var(--text);
-    }
-
-    .character-card .star-empty {
-      color: #7d7d7d;
-    }
+    .character-card .star-filled { color: #f0cf5c; }
+    .character-card .archetype-value { color: #d95e5e; }
+    .character-card .archetype-separator { color: var(--text); }
+    .character-card .star-empty { color: #7d7d7d; }
 
     .empty-state {
       padding: 20px;
@@ -185,13 +181,8 @@
     }
 
     @media (max-width: 700px) {
-      body {
-        padding: 15px;
-      }
-
-      .shell {
-        padding: 18px;
-      }
+      body { padding: 15px; }
+      .shell { padding: 18px; }
     }
   </style>
 </head>
@@ -202,14 +193,14 @@
       <p>Hi. This is the quick home page for hosted character movesets. The look will get standardized later; for now, pick a character below to open their page.</p>
     </section>
 
-    <section class="character-grid" id="character-grid" aria-label="Characters">
+    <div id="game-list">
       <div class="empty-state">Loading movesets...</div>
-    </section>
+    </div>
   </main>
 
   <script>
-    const charsApi = "https://api.github.com/repos/Margeshy/geshy-concepts/contents/Shonen%20Unleashed/chars";
-    const grid = document.getElementById("character-grid");
+    const repoApi = "https://api.github.com/repos/Margeshy/geshy-concepts/contents";
+    const gameList = document.getElementById("game-list");
 
     function textFrom(root, selector) {
       const element = root.querySelector(selector);
@@ -252,8 +243,19 @@
       return card;
     }
 
-    async function readCharacterPage(characterDir) {
-      const pagePath = `${characterDir.path}/index.html`;
+    function renderGame(game, characters) {
+      const section = document.createElement("section");
+      section.className = "game-section";
+      section.innerHTML = `
+        <h2 class="game-title"><span>${game.name}</span></h2>
+        <div class="character-grid"></div>
+      `;
+      section.querySelector(".character-grid").replaceChildren(...characters.map(renderCard));
+      return section;
+    }
+
+    async function readCharacterPage(game, characterDir) {
+      const pagePath = `${game.path}/chars/${characterDir.name}/index.html`;
       const response = await fetch(pagePath, { cache: "no-store" });
       const html = await response.text();
       const doc = new DOMParser().parseFromString(html, "text/html");
@@ -270,26 +272,47 @@
       };
     }
 
+    async function readJson(url) {
+      const response = await fetch(url, { cache: "no-store" });
+      if (!response.ok) throw new Error(`Request failed: ${url}`);
+      return response.json();
+    }
+
+    async function readGame(gameDir) {
+      const charsUrl = `${repoApi}/${encodeURIComponent(gameDir.name)}/chars`;
+      const files = await readJson(charsUrl);
+      const pages = files
+        .filter((file) => file.type === "dir")
+        .map((file) => ({ name: file.name }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+      const characters = await Promise.all(pages.map((page) => readCharacterPage(gameDir, page)));
+      return { game: gameDir, characters };
+    }
+
     async function loadCharacters() {
       try {
-        const response = await fetch(charsApi, { cache: "no-store" });
-        const files = await response.json();
-        const pages = files
+        const files = await readJson(repoApi);
+        const gameDirs = files
           .filter((file) => file.type === "dir")
-          .map((file) => ({ name: file.name, path: `Shonen%20Unleashed/chars/${file.name}` }))
+          .map((file) => ({ name: file.name, path: encodeURIComponent(file.name) }))
           .sort((a, b) => a.name.localeCompare(b.name));
 
-        const characters = await Promise.all(pages.map(readCharacterPage));
-        grid.replaceChildren(...characters.map(renderCard));
+        const games = (await Promise.allSettled(gameDirs.map(readGame)))
+          .filter((result) => result.status === "fulfilled" && result.value.characters.length > 0)
+          .map((result) => result.value);
 
-        if (characters.length === 0) {
-          grid.replaceChildren(Object.assign(document.createElement("div"), {
+        if (games.length === 0) {
+          gameList.replaceChildren(Object.assign(document.createElement("div"), {
             className: "empty-state",
             textContent: "No movesets have been published yet.",
           }));
+          return;
         }
+
+        gameList.replaceChildren(...games.map(({ game, characters }) => renderGame(game, characters)));
       } catch (error) {
-        grid.replaceChildren(Object.assign(document.createElement("div"), {
+        gameList.replaceChildren(Object.assign(document.createElement("div"), {
           className: "empty-state",
           textContent: "Could not load the moveset index.",
         }));
