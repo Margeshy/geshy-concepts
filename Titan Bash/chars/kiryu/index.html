@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiryu Moveset</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+    :root {
+      --bg: #101214;
+      --panel: #17191c;
+      --panel-2: #1d2024;
+      --panel-3: #24282d;
+      --text: #f2f4f7;
+      --muted: #b9c0c8;
+      --border: #4d5963;
+      --border-strong: #70c6d9;
+      --accent: #70c6d9;
+      --base-accent: #8be4f4;
+      --shadow: rgba(0, 0, 0, 0.24);
+      --font-display: "Press Start 2P", "VT323", "Courier New", monospace;
+      --font-body: "VT323", "Lucida Console", "Courier New", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #0b0d0f;
+      color: var(--text);
+      font-family: var(--font-body);
+    }
+
+    body {
+      padding: 30px;
+      font-size: 1.45rem;
+      line-height: 1.35;
+      letter-spacing: 0.015em;
+    }
+
+    .music-control {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 5;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      background: var(--panel);
+      border: 1px solid transparent;
+      box-shadow: 0 8px 18px var(--shadow);
+    }
+
+    .music-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 10px 14px;
+      color: var(--text);
+      background: transparent;
+      border: 0;
+      font-family: var(--font-body);
+      font-size: 1.15rem;
+      line-height: 1;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+    }
+
+    .music-button:hover,
+    .music-button.is-playing {
+      color: var(--base-accent);
+    }
+
+    .music-button-icon {
+      color: var(--base-accent);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      line-height: 1;
+    }
+
+    .music-volume {
+      width: 95px;
+      max-width: 0;
+      opacity: 0;
+      accent-color: var(--base-accent);
+      cursor: pointer;
+      transition: max-width 160ms ease, opacity 160ms ease;
+    }
+
+    .music-control:hover .music-volume,
+    .music-control:focus-within .music-volume {
+      max-width: 95px;
+      opacity: 1;
+    }
+
+    .music-audio {
+      display: none;
+    }
+
+    .template-shell {
+      position: relative;
+      max-width: 1475px;
+      margin: 0 auto;
+      padding: 28px;
+      background: var(--bg);
+      border: 1px solid transparent;
+      outline: 0;
+      box-shadow:
+        0 10px 26px var(--shadow);
+    }
+
+    .template-shell::before,
+    .template-shell::after {
+      content: "";
+      display: block;
+      position: absolute;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+
+    .template-shell::before {
+      left: 0;
+      top: -150%;
+      width: 100%;
+      height: 400%;
+      border-top: 1px solid var(--border-strong);
+      border-bottom: 1px solid var(--border-strong);
+      transform: scaleY(0.25);
+      transform-origin: center;
+    }
+
+    .template-shell::after {
+      left: -150%;
+      top: 0;
+      width: 400%;
+      height: 100%;
+      border-left: 1px solid var(--border-strong);
+      border-right: 1px solid var(--border-strong);
+      transform: scaleX(0.25);
+      transform-origin: center;
+    }
+
+    .music-control::before,
+    .music-control::after {
+      content: "";
+      display: block;
+      position: absolute;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+
+    .music-control::before {
+      left: 0;
+      top: -150%;
+      width: 100%;
+      height: 400%;
+      border-top: 1px solid var(--base-accent);
+      border-bottom: 1px solid var(--base-accent);
+      transform: scaleY(0.25);
+      transform-origin: center;
+    }
+
+    .music-control::after {
+      left: -150%;
+      top: 0;
+      width: 400%;
+      height: 100%;
+      border-left: 1px solid var(--base-accent);
+      border-right: 1px solid var(--base-accent);
+      transform: scaleX(0.25);
+      transform-origin: center;
+    }
+
+    .pixel-panel {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid transparent;
+      outline: 0;
+      box-shadow: none;
+    }
+
+    .pixel-panel::before,
+    .pixel-panel::after,
+    .media-box::before,
+    .media-box::after,
+    .portrait-box::before,
+    .portrait-box::after,
+    .banner-box::before,
+    .banner-box::after {
+      content: "";
+      display: block;
+      position: absolute;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+
+    .pixel-panel::before,
+    .media-box::before,
+    .portrait-box::before,
+    .banner-box::before {
+      left: 0;
+      top: -150%;
+      width: 100%;
+      height: 400%;
+      border-top: 1px solid var(--base-accent);
+      border-bottom: 1px solid var(--base-accent);
+      transform: scaleY(0.25);
+      transform-origin: center;
+    }
+
+    .pixel-panel::after,
+    .media-box::after,
+    .portrait-box::after,
+    .banner-box::after {
+      left: -150%;
+      top: 0;
+      width: 400%;
+      height: 100%;
+      border-left: 1px solid var(--base-accent);
+      border-right: 1px solid var(--base-accent);
+      transform: scaleX(0.25);
+      transform-origin: center;
+    }
+
+    .meta-chip {
+      position: relative;
+      border: 1px solid transparent;
+    }
+
+    .meta-chip::before,
+    .meta-chip::after {
+      content: "";
+      display: block;
+      position: absolute;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+
+    .meta-chip::before {
+      left: 0;
+      top: -150%;
+      width: 100%;
+      height: 400%;
+      border-top: 1px solid var(--accent);
+      border-bottom: 1px solid var(--accent);
+      transform: scaleY(0.25);
+      transform-origin: center;
+    }
+
+    .meta-chip::after {
+      left: -150%;
+      top: 0;
+      width: 400%;
+      height: 100%;
+      border-left: 1px solid var(--accent);
+      border-right: 1px solid var(--accent);
+      transform: scaleX(0.25);
+      transform-origin: center;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 400px minmax(425px, 1fr);
+      gap: 20px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .portrait-box,
+    .banner-box,
+    .media-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 225px;
+      padding: 18px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      border: 1px solid transparent;
+      background: var(--panel-2);
+      box-shadow: none;
+      image-rendering: pixelated;
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      line-height: 1.55;
+    }
+
+    .portrait-box {
+      padding: 0;
+      overflow: visible;
+      border-color: transparent;
+    }
+
+    .portrait-box img {
+      display: block;
+      width: 100%;
+      height: 225px;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .media-box {
+      border-color: transparent;
+    }
+
+    .media-box img {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .character-name,
+    .section-heading,
+    .overview-label,
+    .move-title,
+    .detail-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+
+    .character-name {
+      margin: 0;
+      font-size: clamp(1.8rem, 3.1vw, 2.5rem);
+      line-height: 1.25;
+      letter-spacing: 0.05em;
+      text-shadow: none;
+      color: var(--base-accent);
+    }
+
+    .character-subtitle {
+      color: #d2d2d2;
+      font-family: var(--font-body);
+      font-size: 1.6rem;
+      letter-spacing: 0.02em;
+      line-height: 1.45;
+      font-style: italic;
+      margin: 0;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .meta-chip {
+      padding: 12px 15px 11px;
+      border-color: transparent;
+      background: var(--panel-3);
+      color: #ececec;
+      font-family: var(--font-body);
+      font-size: 1.52rem;
+      letter-spacing: 0.015em;
+      line-height: 1.25;
+      white-space: nowrap;
+      margin: 0;
+    }
+
+    .chip-label,
+    .chip-value {
+      display: inline;
+    }
+
+    .currency-dollar {
+      color: #71d66d;
+    }
+
+    .currency-token {
+      color: #f0cf5c;
+    }
+
+    .archetype-value {
+      color: #d2d2d2;
+    }
+
+    .archetype-pressurer {
+      color: #ef7777;
+    }
+
+    .difficulty-stars {
+      color: #d2d2d2;
+    }
+
+    .star-filled {
+      color: #f0cf5c;
+    }
+
+    .star-empty {
+      color: #7d7d7d;
+    }
+
+    .overview {
+      margin-bottom: 22px;
+      overflow: visible;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .overview-row {
+      position: relative;
+      min-height: 262px;
+    }
+
+    .overview-row:first-child {
+      border-left: 0;
+    }
+
+    .overview-row + .overview-row::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 18px;
+      bottom: 18px;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .overview-label,
+    .overview-copy {
+      padding: 22px 25px;
+    }
+
+    .overview-label {
+      position: relative;
+      display: block;
+      padding-bottom: 12px;
+      background: transparent;
+      color: var(--base-accent);
+      font-size: 1.02rem;
+      letter-spacing: 0.12em;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .overview-label::after {
+      content: "";
+      position: absolute;
+      left: 25px;
+      right: 25px;
+      bottom: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .overview-copy {
+      color: #dadada;
+      font-size: 1.52rem;
+      line-height: 1.45;
+      letter-spacing: 0.015em;
+      margin: 0;
+    }
+
+    .utility-passive {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: stretch;
+    }
+
+    .mini-card {
+      padding: 20px 22px;
+      min-height: 148px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .mini-card-content {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mini-title {
+      margin: 0 0 12px;
+      padding-bottom: 12px;
+      border-bottom: 0.25px solid rgba(255, 255, 255, 0.08);
+      color: var(--base-accent);
+      font-family: var(--font-display);
+      font-weight: 400;
+      text-transform: uppercase;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      letter-spacing: 0.12em;
+    }
+
+    .mini-copy {
+      color: #d8d8d8;
+      font-size: 1.48rem;
+      line-height: 1.45;
+      letter-spacing: 0.015em;
+      margin: 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin: 22px 0 15px;
+      color: var(--base-accent);
+      font-size: clamp(1rem, 1.5vw, 1.12rem);
+      text-align: center;
+      letter-spacing: 0.12em;
+      line-height: 1.55;
+    }
+
+    .section-heading::before,
+    .section-heading::after {
+      content: "";
+      flex: 1 1 80px;
+      height: 3px;
+      background:
+        linear-gradient(
+          90deg,
+          transparent 0 10%,
+          var(--accent) 10% 22%,
+          transparent 22% 30%,
+          var(--accent) 30% 42%,
+          transparent 42% 58%,
+          var(--accent) 58% 70%,
+          transparent 70% 78%,
+          var(--accent) 78% 90%,
+          transparent 90% 100%
+        );
+      opacity: 0.7;
+    }
+
+    .move-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .move-row {
+      display: grid;
+      grid-template-columns: 375px minmax(400px, 1.6fr) minmax(312px, 1.2fr);
+      overflow: visible;
+      align-items: stretch;
+      border-width: 1px;
+      border-color: transparent;
+    }
+
+    .utility-move-row {
+      grid-template-columns: 375px minmax(400px, 1.6fr) minmax(312px, 1.2fr);
+    }
+
+    .utility-move-row > .move-cell:first-child {
+      grid-column: 1 / 3;
+    }
+
+    .utility-move-row > .detail-block {
+      grid-column: 3;
+    }
+
+    .move-cell {
+      position: relative;
+      min-width: 0;
+      padding: 19px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .move-cell:first-child {
+      border-left: 0;
+    }
+
+    .move-cell + .move-cell::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 18px;
+      bottom: 18px;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .move-media {
+      padding: 12px;
+    }
+
+    .move-media .media-box {
+      min-height: 130px;
+      height: 100%;
+      font-size: 0.825rem;
+    }
+
+    .move-title {
+      margin: 0 0 12px;
+      padding-bottom: 12px;
+      border-bottom: 0.25px solid rgba(255, 255, 255, 0.08);
+      font-size: 1.02rem;
+      letter-spacing: 0.12em;
+      line-height: 1.55;
+      color: var(--base-accent);
+    }
+
+    .inline-base {
+      color: var(--base-accent);
+    }
+
+    .move-body,
+    .note-properties,
+    .note-copy,
+    .detail-block {
+      color: #d7d7d7;
+      font-size: 1.48rem;
+      line-height: 1.45;
+      letter-spacing: 0.015em;
+    }
+
+    .move-body {
+      margin-top: 12px;
+      margin-bottom: 0;
+    }
+
+    .detail-title {
+      color: #f0f0f0;
+      display: block;
+      margin: 0 0 10px;
+      padding-bottom: 12px;
+      border-bottom: 0.25px solid rgba(255, 255, 255, 0.08);
+      font-size: 1.02rem;
+      letter-spacing: 0.12em;
+      line-height: 1.55;
+    }
+
+    .note-properties,
+    .note-copy {
+      margin: 0;
+    }
+
+    .note-copy {
+      margin-top: 18px;
+    }
+
+    .lower-panel {
+      margin-top: 12px;
+      padding: 22px 25px;
+      color: #d6d6d6;
+      line-height: 1.45;
+      font-size: 1.5rem;
+      letter-spacing: 0.015em;
+      min-height: 0;
+      height: auto;
+      border-width: 1px;
+      border-color: transparent;
+    }
+
+    .closing-copy {
+      grid-column: 1 / -1;
+      margin: 0;
+    }
+
+    .footer-strip {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 22px;
+      align-items: end;
+      min-height: 0;
+      height: auto;
+    }
+
+    .footer-meta {
+      display: block;
+      color: var(--muted);
+      font-family: var(--font-body);
+      font-size: 1.4rem;
+      line-height: 1.3;
+      text-align: right;
+      letter-spacing: 0.015em;
+      margin: 0;
+      align-self: end;
+      justify-self: end;
+    }
+
+    @media (max-width: 1100px) {
+      .hero {
+        grid-template-columns: 350px 1fr;
+      }
+
+      .move-row {
+        grid-template-columns: 325px minmax(325px, 1.35fr) 1fr;
+      }
+
+      .utility-move-row {
+        grid-template-columns: 325px minmax(325px, 1.35fr) 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      body {
+        padding: 15px;
+      }
+
+      .template-shell {
+        padding: 18px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .overview-row {
+        min-height: 0;
+      }
+
+      .overview {
+        grid-template-columns: 1fr;
+      }
+
+      .overview-row {
+        border-left: 0;
+        border-top: 0.25px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .overview-row + .overview-row::before {
+        display: none;
+      }
+
+      .overview-row:first-child {
+        border-top: 0;
+      }
+
+      .utility-passive {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-card,
+      .mini-card.mini-card-media-left {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-media .media-box {
+        min-height: 132px;
+      }
+
+      .move-row {
+        grid-template-columns: 1fr;
+      }
+
+      .utility-move-row > .move-cell:first-child,
+      .utility-move-row > .detail-block {
+        grid-column: auto;
+      }
+
+      .move-cell {
+        border-left: 0;
+        border-top: 0.25px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .move-cell + .move-cell::before {
+        display: none;
+      }
+
+      .move-cell:first-child {
+        border-top: 0;
+      }
+
+      .footer-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-meta {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="music-control">
+    <button class="music-button" type="button" aria-pressed="false" aria-label="Play character theme music">
+      <span class="music-button-icon" aria-hidden="true">&#9834;</span>
+      <span class="music-button-label">Music</span>
+    </button>
+    <input class="music-volume" type="range" min="0" max="1" step="0.01" value="0.65" aria-label="Music volume">
+  </div>
+  <audio class="music-audio" src="assets/theme.mp3" loop preload="none"></audio>
+  <main class="template-shell">
+    <section class="hero pixel-panel">
+      <div class="portrait-box">
+        <img src="assets/800px-GigaBash_Mechagodzilla_render.png" alt="Kiryu hero art">
+      </div>
+      <header class="hero-copy">
+        <h1 class="character-name">Kiryu</h1>
+        <p class="character-subtitle">"Kiryu, you understand what I say."</p>
+        <div class="hero-meta">
+          <p class="meta-chip"><span class="chip-label">Archetype:</span> <span class="chip-value archetype-value archetype-pressurer">Pressurer</span></p>
+          <p class="meta-chip"><span class="chip-label">Difficulty:</span> <span class="chip-value difficulty-stars">[<span class="star-filled">*</span><span class="star-filled">*</span><span class="star-filled">*</span><span class="star-empty">*</span><span class="star-empty">*</span>]</span></p>
+        </div>
+      </header>
+    </section>
+
+    <section class="overview pixel-panel">
+      <article class="overview-row">
+        <div class="overview-label">Designer Notes</div>
+        <p class="overview-copy">My idea for Kiryu is a machine with a single purpose, to defeat the enemy. In the case of the movies it was a single target being Godzilla. I want him to be aggressive to bring over that relentless feel to Titan Bash, and I think the lock on mechanic helps solidify that pretty well!<br><br>Do note this Kiryu will be somewhat special, his weapons won't be out and about for display, they'll be inside his metal body until a move using them is activated, in which they will pop out. I am doing this just to make the start-ups more audible and in turn fairer.</p>
+      </article>
+    </section>
+
+    <h2 class="section-heading">Base Moveset</h2>
+    <section class="move-list utility-passive">
+      <article class="move-row pixel-panel utility-move-row">
+        <div class="move-cell">
+          <h3 class="move-title">[Special] Lock-On</h3>
+          <p class="move-body">Special is a lock on mechanic. Attacking opponent that is locked on alters certain moves.</p>
+        </div>
+        <div class="move-cell detail-block">
+          <h4 class="detail-title">Notes</h4>
+          <p class="note-copy">This doesn't actually lock onto opponents to aim for you, just the visual effect.<br><br>Considering: Lock-On also makes attacks have higher damage. Not too sure about this due to balance</p>
+        </div>
+      </article>
+    </section>
+    <section class="move-list">
+      <article class="move-row pixel-panel">
+        <div class="move-cell move-media"><div class="media-box"><img src="assets/kiryu_grab.webp" alt="Kiryu grab preview"></div></div>
+        <div class="move-cell">
+          <h3 class="move-title">[G] Iron Cyclone</h3>
+          <p class="move-body">Kiryu throws both arms forward, grabbing any opponent caught in his path. With them firmly in his grasp, he spins to build momentum before hurling them away.</p>
+        </div>
+        <div class="move-cell detail-block">
+          <h4 class="detail-title">Notes</h4>
+          <p class="note-properties">Properties: Combo Ender, Grab, Knockaway</p>
+        </div>
+      </article>
+
+      <article class="move-row pixel-panel">
+        <div class="move-cell move-media"><div class="media-box"><img src="assets/kiryu_electricwrist.webp" alt="Kiryu electric wrist preview"></div></div>
+        <div class="move-cell">
+          <h3 class="move-title">[A1] MASER Edge</h3>
+          <p class="move-body">Kiryu lunges forward, briefly activating his jet boosters to propel himself ahead. As he advances, he deploys his wrist blade and drives it into the first opponent he reaches. He then channels electricity through the blade, overloading and electrocuting the opponent.</p>
+        </div>
+        <div class="move-cell detail-block">
+          <h4 class="detail-title">Notes</h4>
+          <p class="note-properties">Properties: Combo Starter/Extender, Dash Attack, Stun</p>
+          <p class="note-copy">Main way of getting close. It has high endlag as to not encourage throwing it out in neutral as much.</p>
+        </div>
+      </article>
+
+      <article class="move-row pixel-panel">
+        <div class="move-cell move-media"><div class="media-box"><img src="assets/kiryu_rockets.webp" alt="Kiryu rocket cannons preview"></div></div>
+        <div class="move-cell">
+          <h3 class="move-title">[A2] Rockets Away!</h3>
+          <p class="move-body">Kiryu deploys a pair of rocket cannons from atop his shoulders and unleashes a relentless bombardment of rockets directly ahead.</p>
+        </div>
+        <div class="move-cell detail-block">
+          <h4 class="detail-title">Notes</h4>
+          <p class="note-properties">Properties: Neutral, Projectile</p>
+          <p class="note-copy">This is not meant to combo start nor end, it leaves both parties in neutral (if the last couple of shots hit).<br><br>Considering: attacking locked on opponents also gives slightly extra damage</p>
+        </div>
+      </article>
+
+      <article class="move-row pixel-panel">
+        <div class="move-cell move-media"><div class="media-box"><img src="assets/kiryu_maser.webp" alt="Kiryu MASER Cannon preview"></div></div>
+        <div class="move-cell">
+          <h3 class="move-title">[A3] MASER Cannon</h3>
+          <p class="move-body">Kiryu opens his jaws as the emitter housed within his mouth generates and amplifies concentrated microwave energy. Once fully charged, it releases the gathered energy as a single powerful Maser blast, rapidly heating and scorching anybody caught in its path.<br><br>Kiryu's beam is unable to extend in combo.<br><br>With lock on it becomes <span class="inline-base">Absolute Zero Cannon</span></p>
+        </div>
+        <div class="move-cell detail-block">
+          <h4 class="detail-title">Notes</h4>
+          <p class="note-properties">Properties: Neutral, Beam</p>
+        </div>
+      </article>
+
+      <article class="move-row pixel-panel">
+        <div class="move-cell move-media"><div class="media-box"><img src="assets/kiryu_azc.webp" alt="Kiryu Absolute Zero Cannon preview"></div></div>
+        <div class="move-cell">
+          <h3 class="move-title">[A3] Absolute Zero Cannon</h3>
+          <p class="move-body">Kiryu unfolds the panels of his chest, revealing a large cannon bore. Energy gathers within the exposed weapon and forms into an orb, which is rapidly cooled down to -273.15°C. Kiryu then fires the orb forward, flash-freezing anything caught in its path. Any attack to a frozen opponent shatters the ice, which adds damage on top, or after a certain time happens by itself.<br><br>The freeze itself stuns, but when shattered the opponent is out of stun, requiring an attack like A1/UA2 to combo start.</p>
+        </div>
+        <div class="move-cell detail-block">
+          <h4 class="detail-title">Notes</h4>
+          <p class="note-properties">Properties: Projectile, Stun</p>
+          <p class="note-copy">The projectile acts like a particle(?). It should dissipate as it moves further, which is why the ultimate helps with the mobility to get close.</p>
+        </div>
+      </article>
+    </section>
+
+    <h2 class="section-heading mode-heading">Mode Moveset</h2>
+    <section class="move-list mode-move-list">
+      <article class="move-row pixel-panel">
+        <div class="move-cell move-media"><div class="media-box"><img src="assets/kiryu_jetboosters.webp" alt="Kiryu jet boosters preview"></div></div>
+        <div class="move-cell">
+          <h3 class="move-title">[Ultimate] Booster Overdrive</h3>
+          <p class="move-body">Kiryu enters mode; Jet Boosters are deployed into "overdrive" mode, causing a blue coloration, and giving different variants to A1 and A2. The mode is on a fast timer due to how strong it is.</p>
+        </div>
+        <div class="move-cell detail-block">
+          <h4 class="detail-title">Notes</h4>
+          <p class="note-properties">Properties: Ultimate, I-Frames</p>
+        </div>
+      </article>
+
+      <article class="move-row pixel-panel">
+        <div class="move-cell move-media"><div class="media-box"><img src="assets/kiryu_shoulderbash.webp" alt="Kiryu shoulder bash preview"></div></div>
+        <div class="move-cell">
+          <h3 class="move-title">[A1] Boost Drive</h3>
+          <p class="move-body">Kiryu uses the tremendous speed generated by his boosters to surge forward, seemingly vanishing before instantly reappearing ahead. Any opponent caught in his path is struck by a powerful shoulder bash and sent flying.</p>
+        </div>
+        <div class="move-cell detail-block">
+          <h4 class="detail-title">Notes</h4>
+          <p class="note-properties">Properties: Combo Ender, Dash Attack, Knockaway</p>
+          <p class="note-copy">Really strong and better than A1 in base. Endlag however is MORE than A1 in base is if whiffed.</p>
+        </div>
+      </article>
+
+      <article class="move-row pixel-panel">
+        <div class="move-cell move-media"><div class="media-box"><img src="assets/kiryu_missiles.webp" alt="Kiryu missile barrage preview"></div></div>
+        <div class="move-cell">
+          <h3 class="move-title">[A2] Boost Salvo</h3>
+          <p class="move-body">Kiryu deploys the launchers mounted on his back and fires a barrage of missiles forward. The missiles explode upon impact, stunning any opponent caught in the blasts. These missiles can only combo start, the startup makes them unable to extend.<br><br>With lock on, the missiles gains seeking properties.</p>
+        </div>
+        <div class="move-cell detail-block">
+          <h4 class="detail-title">Notes</h4>
+          <p class="note-properties">Properties: Combo Starter, Projectile, Seeking</p>
+          <p class="note-copy">In both versions, Kiryu is positive, meaning he can walk alongside the missiles and cause great pressure to the opponent. Mainly used to better land <span class="inline-base">Absolute Zero Cannon</span>.</p>
+        </div>
+      </article>
+
+    </section>
+
+    <h2 class="section-heading">Closing Notes</h2>
+    <section class="lower-panel pixel-panel footer-strip">
+      <p class="closing-copy">If you made it to the bottom, then I would gladly like to thank you for taking time reading this concept of mine :&gt;<br><br>Stop by again for the next one!</p>
+      <p class="footer-meta">
+        &#9829; Made with love by yours truly
+      </p>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const button = document.querySelector(".music-button");
+      const label = button?.querySelector(".music-button-label");
+      const audio = document.querySelector(".music-audio");
+      const volume = document.querySelector(".music-volume");
+      if (!button || !label || !audio || !volume) return;
+
+      let isPlaying = false;
+      audio.loop = true;
+      audio.volume = Number(volume.value);
+
+      volume.addEventListener("input", () => {
+        audio.volume = Number(volume.value);
+      });
+
+      button.addEventListener("click", async () => {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+          await audio.play();
+        } else {
+          audio.pause();
+        }
+        button.classList.toggle("is-playing", isPlaying);
+        button.setAttribute("aria-pressed", String(isPlaying));
+        button.setAttribute("aria-label", `${isPlaying ? "Pause" : "Play"} character theme music`);
+        label.textContent = isPlaying ? "Pause" : "Music";
+      });
+    })();
+  </script>
+</body>
+</html>
