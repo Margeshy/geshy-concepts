@@ -208,7 +208,7 @@
   </main>
 
   <script>
-    const charsApi = "https://api.github.com/repos/Margeshy/su-fighters/contents/chars";
+    const charsApi = "https://api.github.com/repos/Margeshy/geshy-concepts/contents/Shonen%20Unleashed/chars";
     const grid = document.getElementById("character-grid");
 
     function textFrom(root, selector) {
@@ -276,7 +276,7 @@
         const files = await response.json();
         const pages = files
           .filter((file) => file.type === "dir")
-          .map((file) => ({ name: file.name, path: `chars/${file.name}` }))
+          .map((file) => ({ name: file.name, path: `Shonen%20Unleashed/chars/${file.name}` }))
           .sort((a, b) => a.name.localeCompare(b.name));
 
         const characters = await Promise.all(pages.map(readCharacterPage));
