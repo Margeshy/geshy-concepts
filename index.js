@@ -36,7 +36,7 @@ async function readCharacterPage(game, directory) {
     quote: textFrom(header, '.quote, .character-subtitle'),
     image: imagePath ? new URL(imagePath, new URL(path, location.href)).href : '',
     // Keep all real stats, including Tier and HP; don't invent a missing Cost.
-    stats: Array.from(header.querySelectorAll('.stat, .meta-chip')),
+    stats: Array.from(doc.querySelectorAll('.stat, .meta-chip')),
   };
 }
 
@@ -107,3 +107,4 @@ async function loadCharacters() {
 }
 
 loadCharacters();
+
