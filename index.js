@@ -1,9 +1,10 @@
 /* CHARACTER DIRECTORY
-   Each game contains chars/<character>/index.html and that page's assets.
+   The repository root contains chars/<game>/chars/<character>/index.html and that page's assets.
    Cards read the saved page, so names, covers, quotes, and stats stay in sync.
    Both the current editable template and older character sheets are supported. */
 const repoApi = 'https://api.github.com/repos/Margeshy/geshy-concepts/contents';
 const gameList = document.getElementById('game-list');
+const gamesApi = `${repoApi}/chars`;
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -66,7 +67,7 @@ function renderCard(character) {
 }
 
 async function readGame(directory) {
-  const game = { name: directory.name, path: encodeURIComponent(directory.name) };
+  const game = { name: directory.name, path: `chars/${encodeURIComponent(directory.name)}` };
   const files = await readJson(`${repoApi}/${game.path}/chars`);
   const directories = files.filter(file => file.type === 'dir')
     .sort((a, b) => a.name.localeCompare(b.name));
@@ -90,8 +91,7 @@ function renderGame({ game, characters, failed }) {
 
 async function loadCharacters() {
   try {
-    const files = await readJson(repoApi);
-    // templates holds the reusable starter, not a game directory.
+    const files = await readJson(gamesApi);
     const directories = files.filter(file => file.type === 'dir' && file.name !== 'templates')
       .sort((a, b) => a.name.localeCompare(b.name));
     const results = await Promise.allSettled(directories.map(readGame));

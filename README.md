@@ -4,13 +4,13 @@ Open `index.html` through a static web server or GitHub Pages to browse the char
 
 ## Add a character
 
-1. Copy `templates/character/` to `<game>/chars/<character>/`.
+1. Copy `templates/character/` to `chars/<game>/chars/<character>/`.
 2. Edit `index.html`: replace the placeholder name, descriptions, stats, and media.
 3. Put media in that character's `assets/` folder and use relative paths.
 4. Edit the labeled settings at the top of `styles.css` for colors, fonts, borders, and spacing.
 5. Commit the folder. The homepage discovers it automatically after publication.
 
-Use the existing game names, such as `Titan Bash` and `Shonen Unleashed`. Each character's entry file is `index.html`.
+Game folders live under the repository-root `chars/` directory. Use the existing game names, such as `Titan Bash` and `Shonen Unleashed`. Each character's entry file is `index.html`.
 
 ## Edit attack boxes
 
