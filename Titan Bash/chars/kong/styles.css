@@ -551,3 +551,19 @@ p {
   width: 100%;
   height: auto;
 }
+
+/* NO MEDIA: deleting the media div (or leaving it empty) frees its column.
+   Keep a span inside the media div only when you want a visible placeholder. */
+.move:not(:has(> .media > *)) > .media {
+  display: none;
+}
+
+.move:not(:has(> .media > *)) > .move-copy {
+  border-left: 0;
+}
+
+@media (min-width: 901px) {
+  .move:not(:has(> .media > *)) {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 3fr);
+  }
+}
