@@ -528,6 +528,11 @@ p {
   height: auto;
 }
 
+.media-pair {
+  flex-direction: column;
+  gap: 8px;
+}
+
 /* NO MEDIA: deleting the media div (or leaving it empty) frees its column.
    Keep a span inside the media div only when you want a visible placeholder. */
 .move:not(:has(> .media > *)) > .media {
