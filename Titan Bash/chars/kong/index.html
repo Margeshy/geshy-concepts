@@ -280,9 +280,38 @@
         <span class="music-collapse" aria-hidden="true">&gt;</span>
       </summary>
       <div class="music-content">
-        <h2>Music</h2>
-        <audio id="music" controls aria-label="Background music" loop preload="none"><source src="" type="audio/mpeg"></audio>
+        <button id="music-play" type="button" aria-controls="music" aria-pressed="false">Play</button>
+        <label for="music-volume">Vol</label>
+        <input id="music-volume" type="range" min="0" max="1" step="0.05" value="1" aria-label="Music volume">
+        <span id="music-message" role="status"></span>
+        <audio id="music" hidden aria-label="Background music" loop preload="none"><source src="" type="audio/mpeg"></audio>
       </div>
     </details>
+
+    <script>
+      // Music controls: the song path stays in the audio source above.
+      const music = document.getElementById('music');
+      const play = document.getElementById('music-play');
+      const volume = document.getElementById('music-volume');
+      const message = document.getElementById('music-message');
+      volume.addEventListener('input', () => { music.volume = Number(volume.value); });
+      music.volume = Number(volume.value);
+      function updatePlayback() {
+        play.textContent = music.paused ? 'Play' : 'Pause';
+        play.setAttribute('aria-pressed', String(!music.paused));
+      }
+      music.addEventListener('play', updatePlayback);
+      music.addEventListener('pause', updatePlayback);
+      play.addEventListener('click', async () => {
+        if (!music.paused) { music.pause(); return; }
+        message.textContent = '';
+        if (!music.querySelector('source').getAttribute('src').trim()) {
+          message.textContent = 'No song added yet.';
+          return;
+        }
+        try { await music.play(); }
+        catch { message.textContent = 'Could not play this song.'; }
+      });
+    </script>
   </body>
 </html>

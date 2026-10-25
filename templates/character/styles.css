@@ -544,6 +544,60 @@ p {
   }
 }
 
+/* COMPACT MUSIC: uses the sheet's colors and fonts. */
+.music-panel {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  z-index: 10;
+  max-width: calc(100vw - 24px);
+  color: var(--text);
+  background: var(--panel);
+  border: var(--music-border-width) var(--border-style) var(--music-border);
+}
+.music-panel summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+  list-style: none;
+  cursor: pointer;
+  font: 20px var(--body-font);
+}
+.music-panel summary::-webkit-details-marker { display: none; }
+.music-panel summary:hover, #music-play:hover { background: var(--music-hover); }
+.music-panel summary:focus-visible, #music-play:focus-visible, #music-volume:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: -2px;
+}
+.music-collapse, .music-panel[open] .music-expand { display: none; }
+.music-panel[open] .music-collapse { display: inline; }
+.music-panel[open] { display: flex; align-items: center; }
+.music-panel[open] summary { order: 2; }
+.music-content { display: flex; align-items: center; gap: 8px; padding: 4px 8px; font: 16px var(--body-font); }
+#music-play { padding: 5px; min-width: 48px; border: 0; background: transparent; color: var(--text); font: inherit; cursor: pointer; }
+#music-volume { width: 65px; margin: 0; accent-color: var(--color-accent); }
+#music-message:empty { display: none; }
+#music-message:not(:empty) { position: absolute; bottom: calc(100% + 6px); right: 0; padding: 8px; width: 180px; background: var(--panel); border: 1px solid var(--music-border); }
+
+/* NO MEDIA: deleting the media div (or leaving it empty) frees its column.
+   Keep a span inside the media div only when you want a visible placeholder. */
+.move:not(:has(> .media > *)) > .media {
+  display: none;
+}
+
+.move:not(:has(> .media > *)) > .move-copy {
+  border-left: 0;
+}
+
+@media (min-width: 901px) {
+  .move:not(:has(> .media > *)) {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 3fr);
+  }
+}
+
 /* MUSIC PANEL: native disclosure and audio controls; no script required.
    It starts closed because the HTML details tag has no open attribute. */
 .music-panel {
