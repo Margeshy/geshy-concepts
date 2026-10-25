@@ -1,0 +1,553 @@
+/* START HERE: change these values to restyle the page.
+   Colors use #hex codes. Sizes use px (pixels). Keep the semicolons.
+   Font names choose the lettering. The original fonts are in assets/.
+   Smaller-screen adjustments are near the bottom. */
+:root {
+  color-scheme: dark;
+  --bg: #101010;
+  --panel: #171717;
+  --text: #e5e5e5; /* Default text when no color class is added. */
+
+  /* TEXT COLORS: choose a color here, then place its class in the HTML.
+     Box tags use these for headings, including NOTES.
+     Border colors are separate so outlines can be more subtle than text. */
+  --color-accent: #E6A23C; /* Character name and general headings. */
+  --color-base: #E6A23C; /* Base moveset headings. */
+  --color-mode: #15f0e9; /* Mode headings. */
+  --media-bg: #1d1d1d;
+  --muted-text: #bdbdbd;
+  --stat-bg: #202020;
+  --cost-color: #78c774;
+  --difficulty-color: #dfc65a;
+  --divider-color: #707070;
+  --music-hover: #242424;
+  --body-font: Terminal,'Courier New',monospace;
+  --heading-font: Pixel,monospace;
+  --music-font: Terminal,monospace;
+  --body-size: 18px;
+  --page-padding: 22px;
+  --sheet-width: 1000px;
+  --sheet-padding: 21px;
+  --move-gap: 8px;
+
+  /* BORDERS: edit here. These settings apply to every matching box.
+     Thickness: 1px is thin; 2px is thicker; 0px removes the border.
+     Style: solid, dashed, or dotted.
+     Color: use a #hex color or rgba(red, green, blue, opacity).
+     For softer cyan, try rgba(139, 228, 244, 0.25).
+     Opacity runs from 0 (invisible) to 1 (full color).
+     Use transparent to hide a line while keeping its space.
+     The separate keyboard-focus outline stays visible for navigation. */
+  --border-width: 1px; /* Shared thickness; individual boxes follow this. */
+  --border-style: solid;
+
+  /* Main panels: character header, overview, and all attack boxes. */
+  --panel-border-width: var(--border-width);
+  --border: rgba(230, 162, 60, 0.5);
+
+  /* BOX BORDER COLORS: box-base and box-mode use these values.
+     The last rgba number controls opacity: 0 invisible, 1 solid.
+     Each box uses this color for its outline, media frame, and dividers. */
+  --border-base: rgba(230, 162, 60, 0.5);
+  --border-mode: rgba(139, 228, 244, 0.5);
+
+  /* Outside frame around the entire sheet. */
+  --sheet-border-width: var(--border-width);
+  --sheet-border: rgba(230, 162, 60, 0.5);
+
+  /* Picture and video frames. */
+  --media-border-width: var(--border-width);
+  --media-border: rgba(230, 162, 60, 0.5);
+
+  /* Small character facts: tier, archetype, and difficulty. */
+  --stat-border-width: var(--border-width);
+  --stat-border: rgba(230, 162, 60, 0.5);
+
+  /* Music button. */
+  --music-border-width: var(--border-width);
+  --music-border: rgba(230, 162, 60, 0.5);
+
+  /* Inside dividers: under headings and between columns.
+     These have their own thickness and style, independent of box outlines. */
+  --rule-width: 1px;
+  --rule-style: solid;
+  --rule: #2c2c2c;
+
+}
+
+
+/* PAGE AND TEXT: the outer frame, headings, paragraphs, and shared boxes. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: var(--body-size)/1.25 var(--body-font);
+  padding: var(--page-padding);
+}
+
+.sheet {
+  width: 100%;
+  max-width: var(--sheet-width);
+  margin: 0 auto;
+  border: var(--sheet-border-width) var(--border-style) var(--sheet-border);
+  padding: var(--sheet-padding);
+}
+
+h1,h2,h3,.media {
+  font-family: var(--heading-font);
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 30px;
+  line-height: 1.5;
+  margin: 0 0 12px;
+  letter-spacing: -.5px;
+}
+
+h2 {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+h3 {
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: .5px;
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: var(--rule-width) var(--rule-style) var(--rule);
+}
+
+p {
+  margin: 18px 0 0;
+}
+
+.panel {
+  background: var(--panel);
+  border: var(--panel-border-width) var(--border-style) var(--border);
+}
+
+/* CHARACTER HEADER: portrait, quote, and small fact boxes. */
+.character-header {
+  display: grid;
+  grid-template-columns: 33% minmax(0,1fr);
+  gap: 16px;
+  padding: 18px;
+  align-items: center;
+  min-height: 208px;
+}
+
+.media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--media-bg);
+  border: var(--media-border-width) var(--border-style) var(--media-border);
+  color: var(--muted-text);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: .3px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.media span {
+  padding: 12px;
+}
+
+.portrait {
+  height: 170px;
+  font-size: 12px;
+}
+
+.media img,.media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.media:has(img),.media:has(video) {
+  padding: 0;
+}
+
+.quote {
+  font-size: 19px;
+  font-style: italic;
+  margin: 0 0 23px;
+}
+
+.stats {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.stat {
+  border: var(--stat-border-width) var(--border-style) var(--stat-border);
+  background: var(--stat-bg);
+  padding: 11px 10px;
+  white-space: nowrap;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.currency {
+  color: var(--cost-color);
+}
+
+.difficulty {
+  color: var(--difficulty-color);
+}
+
+/* OVERVIEW: core system and designer notes. */
+.overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 15px;
+  padding: 14px 18px;
+  min-height: 198px;
+}
+
+.overview-column {
+  padding: 2px 18px 0 0;
+}
+
+.overview-column+.overview-column {
+  border-left: var(--rule-width) var(--rule-style) var(--rule);
+  padding-left: 18px;
+  padding-right: 0;
+}
+
+/* SECTION HEADINGS: title text and decorative lines. */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 14px 34px 10px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.segments {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.segments i {
+  display: block;
+  width: 18%;
+  height: 2px;
+  background: var(--divider-color);
+}
+
+/* ALL ATTACK BOXES (including utility and passive): media, description, notes.
+   The list creates only the rows it needs. Gap adds space BETWEEN boxes,
+   with no reserved slots or extra space after the last box. */
+.move-list {
+  display: grid;
+  gap: var(--move-gap);
+}
+
+.move {
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+  padding: 9px;
+  min-height: 132px;
+}
+
+.move>.media {
+  /* Keep media centered when a long description makes the attack box taller. */
+  align-self: center;
+  height: 112px;
+  margin-right: 9px;
+}
+
+.move-copy,.move-notes {
+  border-left: var(--rule-width) var(--rule-style) var(--rule);
+  padding: 0 14px;
+  margin: 4px 0;
+}
+
+.move-notes {
+  padding-right: 5px;
+}
+
+.move p {
+  margin-top: 21px;
+}
+
+.move-notes p {
+  margin-top: 11px;
+}
+
+.move-notes p+p {
+  margin-top: 20px;
+}
+
+/* CLOSING NOTES AND SIGNATURE. */
+.closing {
+  min-height: 97px;
+  padding: 20px 18px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.closing>p {
+  margin-top: 18px;
+}
+
+.signature {
+  align-self: flex-end;
+  margin: 3px 0 0;
+  font-size: 17px;
+  color: var(--muted-text);
+  text-align: right;
+}
+
+/* EXISTING MUSIC BUTTON AND ACCESSIBILITY. */
+.music {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 1;
+  border: var(--music-border-width) var(--border-style) var(--music-border);
+  background: var(--panel);
+  color: var(--text);
+  font: 16px var(--music-font);
+  min-width: 86px;
+  min-height: 44px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.music:hover {
+  background: var(--music-hover);
+}
+
+.music:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* SMALLER SCREENS: these rules override the sizes above when the window is narrower. */
+@media(min-width:761px) and (max-width:1040px) {
+  h1 {
+    font-size: clamp(20px,2.85vw,30px);
+  }
+
+  .stat {
+    font-size: 16px;
+    padding: 11px 8px;
+  }
+
+  .character-header {
+    gap: 14px;
+  }
+
+}
+
+@media(max-width:900px) {
+  body {
+    padding: 12px 12px 72px;
+  }
+
+  .sheet {
+    padding: 14px;
+  }
+
+  .character-header {
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .portrait {
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+
+  h1 {
+    font-size: clamp(18px,4.4vw,30px);
+    margin-top: 4px;
+  }
+
+  .quote {
+    margin-bottom: 18px;
+  }
+
+  .stats {
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    font-size: 18px;
+  }
+
+  .overview {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .overview-column {
+    padding: 0 0 22px;
+    min-height: 125px;
+  }
+
+  .overview-column+.overview-column {
+    border-left: 0;
+    border-top: var(--rule-width) var(--rule-style) var(--rule);
+    padding: 20px 0 15px;
+  }
+
+  .section-title {
+    gap: 12px;
+    margin: 22px 0 12px;
+  }
+
+  h2 {
+    font-size: 13px;
+  }
+
+  .segments {
+    gap: 5px;
+  }
+
+  .segments i {
+    width: 35%;
+  }
+
+  .segments i:nth-child(even) {
+    display: none;
+  }.move {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 0;
+  }
+
+  .move>.media {
+    height: auto;
+    aspect-ratio: 16/7;
+    margin: 0 0 14px;
+  }
+
+  .move-copy,.move-notes {
+    border-left: 0;
+    padding: 0 4px 18px;
+    margin: 0;
+  }
+
+  .move-notes {
+    padding-top: 0;
+  }
+
+  .move p {
+    margin-top: 14px;
+  }
+
+  .move-notes p+p {
+    margin-top: 14px;
+  }
+
+  .closing {
+    min-height: 130px;
+    padding: 16px;
+  }
+
+  .signature {
+    margin-top: 24px;
+    font-size: 16px;
+  }
+
+}
+
+@media(prefers-reduced-motion:reduce) {
+  * {
+    scroll-behavior: auto;
+  }
+
+}
+
+/* ORIGINAL FONTS: normally leave this part alone. */
+@font-face {
+  font-family: Pixel;
+  src: url(assets/pixel.ttf) format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Terminal;
+  src: url(assets/terminal.ttf) format('truetype');
+  font-display: swap;
+}
+
+
+/* Optional text colors for individual headings or spans outside themed boxes. */
+.color-accent { color: var(--color-accent); }
+.color-base { color: var(--color-base); }
+.color-mode { color: var(--color-mode); }
+
+/* WHOLE BOX COLORS: add ONE tag to the article, e.g.
+   <article class="move panel box-mode">. No tags needed on its children.
+   Switch box-mode to box-base to recolor the entire box.
+   Body text stays neutral. Border widths and media centering are unchanged. */
+.box-base {
+  --box-color: var(--color-base);
+  --box-border: var(--border-base);
+}
+
+.box-mode {
+  --box-color: var(--color-mode);
+  --box-border: var(--border-mode);
+}
+
+.box-base, .box-mode {
+  --rule: var(--box-border);
+  border-color: var(--box-border);
+}
+
+.box-base .media, .box-mode .media {
+  border-color: var(--box-border);
+}
+
+.box-base h1, .box-base h2, .box-base h3,
+.box-mode h1, .box-mode h2, .box-mode h3 {
+  color: var(--box-color);
+}
+
+/* REAL MEDIA: let the frame follow the image/video proportions.
+   Placeholder boxes keep their default sizes. This overrides the fixed
+   heights and mobile aspect ratios above, without cropping the media.
+   Black bars inside the actual file remain part of that file. */
+.media:has(> img), .media:has(> video),
+.move > .media:has(> img), .move > .media:has(> video) {
+  height: auto;
+  aspect-ratio: auto;
+}
+
+.media > img, .media > video {
+  width: 100%;
+  height: auto;
+}

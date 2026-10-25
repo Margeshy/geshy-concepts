@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="my concept for kong in titan bash :D">
+    <!-- Browser-tab name: edit the words below. -->
+    <title>Axe-Bound Kong - TB</title>
+    <!-- Change colors, fonts, and spacing in styles.css. -->
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="sheet">
+      <!-- START CHARACTER HEADER: portrait, name, quote, cost, archetype, difficulty. -->
+      <header class="character-header panel">
+        <div class="media portrait">
+          <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+          <img src="assets/kong-cover.png" alt="Kong holding his glowing blue axe">
+        </div>
+        <div class="character-info">
+          <!-- TEXT: edit the name, quote, and facts below. Update the star aria-label too. -->
+          <h1 class="color-accent">AXE-BOUND KONG</h1>
+          <p class="quote">“Monkey see, monkey do.”</p>
+          <div class="stats" aria-label="Character details">
+            <div class="stat">Tier: T4</div>
+            <div class="stat">HP: 1150</div>
+            <div class="stat">Archetype: Rushdown</div>
+            <div class="stat">Difficulty: [<span class="difficulty" aria-label="3 out of 5 stars">★★★☆☆</span>]</div>
+          </div>
+        </div>
+      </header>
+      <!-- END CHARACTER HEADER -->
+      <!-- START OVERVIEW: edit the headings and paragraphs in the two columns. -->
+      <section class="overview panel" aria-label="Overview">
+        <div class="overview-column">
+          <h3 class="color-accent">CORE SYSTEM</h3>
+          <p>The general idea is that Kong is smart in battle. He relies on his environment by clinging onto surfaces for mobility, or taking hold of elements (trees, buildings, etc.). In base, he favors mobility. With his axe equipped, he opts for damage and building ultimate.</p>
+        </div>
+        <div class="overview-column">
+          <h3 class="color-accent">DESIGNER NOTES</h3>
+          <p>For the moveset, I wanted to introduce two mechanics:<br>Pushblock pushes back the opponent when the attack is blocked. An alternative over higher blockstam damage.<br>Environment usage for traversal or buffing his offense.<br><br>In axe mode, charges are only consumed by ult.<br><br>His run speed should be 1-2 values lower than Zilla.</p>
+        </div>
+      </section>
+      <!-- END OVERVIEW -->
+      <!-- START BASE SECTION: copy through the matching END label. -->
+      <section aria-labelledby="base-title">
+        <div class="section-title">
+          <span class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <h2 id="base-title" class="color-base">BASE MOVESET</h2>
+          <span class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        </div>
+        <div class="move-list">
+          <!-- START BOX: UTILITY. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-base" aria-label="UTILITY">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <img src="assets/special_attack.gif" alt="Kong leaps forward and slams down while equipping his axe">
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[SPECIAL] King's Axe</h3>
+              <p>Kong reaches over his shoulder, pulls the axe from his back, and immediately surges forward. He leaps toward the opponent and brings the axe down in a heavy slam. The attack applies pushblock.<br><br>After the slam, Kong keeps the axe in hand and switches to his axe moveset.<br><br>A2, A3, and Ultimate are altered in this state.<br>A charge meter appears on the left side of the screen and tracks how much beam energy the axe has absorbed. It has two thresholds: 10 charge and 20 charge. Reaching each changes the moveset further.<br><br>Once Special comes off cooldown, it can be used again to put the axe away and return to Kong’s base moveset. </p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>CD: 30 DMG: 55</p>
+              <p>Properties: Pushblock, Stance Switch, Utility</p>
+              <p>At 10 charge, the axe glows faint blue; at 20 charge, it shines brighter.</p>
+            </aside>
+          </article>
+          <!-- END BOX: UTILITY -->
+          <!-- START BOX: Base Grab. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-base" aria-label="Base Grab">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(BASE GRAB)</span>
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[G] Jungle's Panoply</h3>
+              <p>Kong reaches out with an open palm and makes a diagonal grab. Against an opponent, Kong catches them, throws them to the ground, and stomps on their torso.<br><br>If he grabs an object instead, Kong holds onto it. He can pick up trees, boulders, or buildings, then use the object up to three times in place of his LCs.<br>On the third use, the object breaks and knocks the opponent away. While Kong is holding an object, he cannot use his other attacks.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>CD: 23 DMG: 55 </p>
+              <p>Properties: Grab, Knockdown, Utility; Knockback on the third object use</p>
+            </aside>
+          </article>
+          <!-- END BOX: Base Grab -->
+          <!-- START BOX: A1 Earthrake. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-base" aria-label="A1 Earthrake">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(A1 EARTHRake)</span>
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[A1] Earthrake</h3>
+              <p>Kong plunges his left arm into the ground and rakes up a spray of soil, hurling it at his opponent. The dirt bursts across them and leaves them stunned.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>CD: 17 DMG: 35 </p>
+              <p>Properties: Projectile, Combo Extender</p>
+            </aside>
+          </article>
+          <!-- END BOX: A1 Earthrake -->
+          <!-- START BOX: A2 Manhattan Stampede. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-base" aria-label="A2 Manhattan Stampede">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <img src="assets/base_a2.gif" alt="Kong charges on all fours, then follows up with an elbow and headbutt">
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[A2] Manhattan Stampede</h3>
+              <p>Kong drops onto all fours and charges straight at his opponent, quickly closing the distance. He can recast into A2 or cancel into another attack.<br><br>On recast, he rises into a heavy elbow strike followed by a headbutt to start a combo. During a combo, he uses only the elbow to knock the opponent away.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>CD: 20 DMG: 45 </p>
+              <p>Properties: Mobility, Recast, Combo Starter/Knockback</p>
+              <p>This can help A3 by getting close to a wall/building to latch onto then cancelling into it.</p>
+            </aside>
+          </article>
+          <!-- END BOX: A2 Manhattan Stampede -->
+          <!-- START BOX: A3 Empire Drop. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-base" aria-label="A3 Empire Drop">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <img src="assets/base_a3_mobile.gif" alt="Kong leaps into an overhead slam and rolls forward">
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[A3] Empire Drop</h3>
+              <p>Kong leaps forward and brings both arms down in an overhead slam. If he misses, he keeps moving with a forward roll that can be steered to reposition. The roll has end lag, leaving him vulnerable to ranged attacks.<br><br>If used near a wall or building, Kong clings onto the surface. Recasting A3 makes him leap off and slam down again; this follow-up always breaks the opponent's block.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>CD: 25 DMG: 70 </p>
+              <p>Properties: Mobility, Recast, Block Breaker</p>
+              <p>The block-breaking follow-up is situational and rewards skilled setup near a surface, its more balanced than something like miregoji's a1+a2 in my opinion.</p>
+            </aside>
+          </article>
+          <!-- END BOX: A3 Empire Drop -->
+          <!-- START BOX: Base Ultimate. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-base" aria-label="Base Ultimate Dominance Show">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <img src="assets/base_ult.gif" alt="Kong spins with his opponent before finishing with a throw">
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[ULTIMATE] Dominance Show</h3>
+              <p>Kong pounds his chest to assert dominance, then leaps forward and throws an unguardable grab at the opponent.Holding them in his grip, he spins faster and faster to build momentum before finishing with a powerful throw.<br><br>While spinning, Kong can aim the throw and move slowly; nearby enemies are repeatedly damaged.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>ULT: 80 DMG: 150 </p>
+              <p>Properties: Ultimate, Grab, AOE, Block Bypass</p>
+            </aside>
+          </article>
+          <!-- END BOX: Base Ultimate -->
+        </div>
+      </section>
+      <!-- END BASE SECTION -->
+      <!-- START AXE SECTION: moves available while Kong has his axe equipped. -->
+      <section aria-labelledby="axe-title">
+        <div class="section-title">
+          <span class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <h2 id="axe-title" class="color-mode">AXE MOVESET</h2>
+          <span class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        </div>
+        <div class="move-list">
+          <!-- START BOX: Ragnarok -->
+          <article class="move panel box-mode" aria-label="Ragnarok">
+            <div class="media">
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(AXE GRAB)</span>
+            </div>
+            <div class="move-copy">
+              <h3>[G] Ragnarok</h3>
+              <p>Kong buries his axe in the opponent’s shoulder and releases his grip as it hacks deeply. He follows with a powerful blow to their torso, crumpling them as he retrieves his axe.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>CD: 24 DMG: 75 </p>
+              <p>Properties: Grab</p>
+            </aside>
+          </article>
+          <!-- END BOX: Ragnarok -->
+          <!-- START BOX: Warpath Pursuit -->
+          <article class="move panel box-mode" aria-label="Axe A2 Warpath Pursuit">
+            <div class="media">
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(AXE A2)</span>
+            </div>
+            <div class="move-copy">
+              <h3>[A2] Warpath Pursuit</h3>
+              <p>Kong hurls his axe forward, lodging it in the opponent. He immediately sprints after them and lands a forceful dropkick, driving them backward. As he follows through, Kong pulls the axe free and retrieves it.<br><br>At 20 charge, Kong sweeps the opponent’s legs as he retrieves the axe, knocking them off balance and starting a combo.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>CD: 23/25 DMG: 80/60 </p>
+              <p>Properties: Projectile, Mobility, Combo Starter [20 Charge]</p>
+              <p>On a successful axe hit, the follow-up is true and stuns.</p>
+            </aside>
+          </article>
+          <!-- END BOX: Warpath Pursuit -->
+          <!-- START BOX: Maelstrom Rive -->
+          <article class="move panel box-mode" aria-label="Axe A3 Maelstrom Rive">
+            <div class="media">
+              <img src="assets/axe_a3.gif" alt="Kong spins with his axe and finishes with a cleave">
+            </div>
+            <div class="move-copy">
+              <h3>[A3] Maelstrom Rive</h3>
+              <p>Kong whirls his axe through a series of rapid hits, carries the motion into a full spin, and finishes with a powerful cleave that knocks the opponent back. The axe can absorb beams to build charge, with each beam tick granting 1 charge.<br><br>This is Kong’s only way to generate axe charge within the moveset.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>CD: 26 DMG: 64 </p>
+              <p>Properties: Multi-Hit, Knockback, Utility</p>
+              <p>The main show for his axe mode! Decided to give it the highest CD out of mode so that charges 10 and 20 take more time between them.</p>
+            </aside>
+          </article>
+          <!-- END BOX: Maelstrom Rive -->
+          <!-- START BOX: Axe Ultimate. -->
+          <article class="move panel box-mode" aria-label="Axe Ultimate">
+            <div class="media">
+              <img src="assets/axe_ult.gif" alt="Kong performs his axe ultimate and finishes with an explosion">
+            </div>
+            <div class="move-copy">
+              <h3>[ULTIMATE] Axe Ultimate</h3>
+              <p>At 10 charge, Kong holds his axe aloft and brings it down toward the opponent’s torso. The axe charges are consumed to release a small explosion, harming the opponent and anybody nearby.<br><br>At 20 charge, Kong raises the axe, shining brighter than ever, then brings it down toward the opponent’s torso, slashes upward at their arm, cleaves across their chest, and sweeps their leg. With the opponent sprawled on the ground, he delivers a final strike to their neck. The axe charges are consumed to release a giant explosion, brutally damaging all nearby enemies.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>ULT: 100/135 DMG: 150/250 + 50/150 based on 10/20 axe charge </p>
+              <p>Properties: Ultimate, AOE</p>
+            </aside>
+          </article>
+          <!-- END BOX: Axe Ultimate -->
+        </div>
+      </section>
+      <!-- END AXE SECTION -->
+      <!-- START CLOSING SECTION: copy through the matching END label. -->
+      <section aria-labelledby="closing-title">
+        <div class="section-title">
+          <span class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <h2 id="closing-title" class="color-accent">CLOSING NOTES</h2>
+          <span class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        </div>
+        <div class="closing panel">
+          <p>for my kong, i wanted something to represent his "ape smarts" compared to dumb lizard godzilla, and this is what i offer to you all. once again, thank you all for reading! hope you enjoyed, give feedback!</p>
+          <footer class="signature">♥ Made with love by yours truly</footer>
+        </div>
+      </section>
+      <!-- END CLOSING SECTION -->
+    </main>
+    <!-- MUSIC SOURCE: replace src="" with your audio file path or a data:audio/... URL to keep this file self-contained. -->
+    <audio id="music" loop preload="none"><source src="" type="audio/mpeg"></audio>
+    <button class="music" type="button" aria-controls="music" aria-pressed="false">♪ Music</button>
+    <span class="sr-only" id="music-status" role="status" aria-live="polite"></span>
+    <!-- EXISTING MUSIC BEHAVIOR: no changes needed here to edit your sheet. -->
+    <script>
+    const music = document.getElementById('music');
+    const toggle = document.querySelector('.music');
+    const status = document.getElementById('music-status');
+    toggle.addEventListener('click', async () => {
+      if (!music.paused) {
+        music.pause();
+        toggle.setAttribute('aria-pressed', 'false');
+        toggle.textContent = '♪ Music';
+        return;
+      }
+      if (!music.querySelector('source').getAttribute('src').trim()) {
+        status.textContent = 'Add an audio file to the marked audio source placeholder to enable music.';
+        toggle.title = status.textContent;
+        return;
+      }
+      try {
+        await music.play();
+        toggle.setAttribute('aria-pressed', 'true');
+        toggle.textContent = '♪ Pause';
+        status.textContent = '';
+      } catch {
+        status.textContent = 'Music could not play. Check the audio source.';
+        toggle.title = status.textContent;
+      }
+    });
+  </script>
+  </body>
+</html>
