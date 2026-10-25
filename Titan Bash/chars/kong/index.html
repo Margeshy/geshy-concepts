@@ -271,37 +271,18 @@
       </section>
       <!-- END CLOSING SECTION -->
     </main>
-    <!-- MUSIC SOURCE: replace src="" with your audio file path or a data:audio/... URL to keep this file self-contained. -->
-    <audio id="music" loop preload="none"><source src="" type="audio/mpeg"></audio>
-    <button class="music" type="button" aria-controls="music" aria-pressed="false">♪ Music</button>
-    <span class="sr-only" id="music-status" role="status" aria-live="polite"></span>
-    <!-- EXISTING MUSIC BEHAVIOR: no changes needed here to edit your sheet. -->
-    <script>
-    const music = document.getElementById('music');
-    const toggle = document.querySelector('.music');
-    const status = document.getElementById('music-status');
-    toggle.addEventListener('click', async () => {
-      if (!music.paused) {
-        music.pause();
-        toggle.setAttribute('aria-pressed', 'false');
-        toggle.textContent = '♪ Music';
-        return;
-      }
-      if (!music.querySelector('source').getAttribute('src').trim()) {
-        status.textContent = 'Add an audio file to the marked audio source placeholder to enable music.';
-        toggle.title = status.textContent;
-        return;
-      }
-      try {
-        await music.play();
-        toggle.setAttribute('aria-pressed', 'true');
-        toggle.textContent = '♪ Pause';
-        status.textContent = '';
-      } catch {
-        status.textContent = 'Music could not play. Check the audio source.';
-        toggle.title = status.textContent;
-      }
-    });
-  </script>
+    <!-- MUSIC: starts collapsed. Click the arrow to show the player.
+         To add a song, edit the source src below, e.g. assets/theme.mp3.
+         Closing the panel keeps music playing. Pause it in the player to stop. -->
+    <details class="music-panel">
+      <summary aria-label="Expand or collapse music player">
+        <span class="music-expand" aria-hidden="true">&lt;</span>
+        <span class="music-collapse" aria-hidden="true">&gt;</span>
+      </summary>
+      <div class="music-content">
+        <h2>Music</h2>
+        <audio id="music" controls aria-label="Background music" loop preload="none"><source src="" type="audio/mpeg"></audio>
+      </div>
+    </details>
   </body>
 </html>

@@ -315,31 +315,7 @@ p {
   text-align: right;
 }
 
-/* EXISTING MUSIC BUTTON AND ACCESSIBILITY. */
-.music {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  z-index: 1;
-  border: var(--music-border-width) var(--border-style) var(--music-border);
-  background: var(--panel);
-  color: var(--text);
-  font: 16px var(--music-font);
-  min-width: 86px;
-  min-height: 44px;
-  padding: 10px 15px;
-  cursor: pointer;
-}
-
-.music:hover {
-  background: var(--music-hover);
-}
-
-.music:focus-visible {
-  outline: 2px solid var(--text);
-  outline-offset: 3px;
-}
-
+/* ACCESSIBILITY */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -567,3 +543,40 @@ p {
     grid-template-columns: minmax(0, 4fr) minmax(0, 3fr);
   }
 }
+
+/* MUSIC PANEL: native disclosure and audio controls; no script required.
+   It starts closed because the HTML details tag has no open attribute. */
+.music-panel {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 10;
+  max-width: calc(100vw - 32px);
+  color: var(--text);
+  background: var(--panel);
+  border: var(--music-border-width) var(--border-style) var(--music-border);
+}
+
+.music-panel summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  list-style: none;
+  cursor: pointer;
+  font: 24px var(--body-font);
+}
+
+.music-panel summary::-webkit-details-marker { display: none; }
+.music-panel summary:hover { background: var(--music-hover); }
+.music-panel summary:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: -3px;
+}
+.music-collapse, .music-panel[open] .music-expand { display: none; }
+.music-panel[open] .music-collapse { display: inline; }
+.music-content { padding: 0 14px 14px; }
+.music-content h2 { margin-bottom: 12px; }
+.music-content audio { display: block; width: 280px; max-width: 100%; }
