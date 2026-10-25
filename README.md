@@ -34,3 +34,11 @@ The starter has generic content and neutral colors. Older published sheets keep 
 - `index.js`: directory discovery and compatibility with both sheet formats.
 
 No build step is required. The homepage uses GitHub's API, so an API outage or rate limit can temporarily prevent discovery. It shows an error instead of silently hiding failed pages.
+
+## Shared-link previews
+
+Each published page has a LINK PREVIEW block in its HTML head. Keep the og:title, og:description, og:url, og:image, and og:image:alt fields and matching twitter fields in sync with the page. Use full public HTTPS URLs, encode spaces as %20, and upload the cover before sharing. The homepage uses Kong as its featured preview image.
+
+The starter has labeled fields and commented URL examples. Replace the examples and uncomment them before publishing. Preview metadata stays in saved HTML because social crawlers may not run JavaScript.
+
+Wait for GitHub Pages deployment before sharing. Discord can cache old previews, including those in existing messages. A new query string such as ?preview=2 can request a fresh preview; the receiving service controls its final appearance.
