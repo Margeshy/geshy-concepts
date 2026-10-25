@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!--
+  HELLO! THIS IS YOUR CHARACTER SHEET.
+  1. Open this file in a text editor. Save it, then refresh it in your browser.
+  2. Words between tags are the text you can change:
+  <p>Your words here.</p>
+  Keep the tags (the parts inside < and >). Use &amp; for & and &lt; for <.
+  3. Look for START and END labels. Copy, move, or delete a whole labeled box.
+  Utility, passive, and attack boxes all belong inside a move-list.
+  The list adds equal gaps automatically; deleted boxes leave no empty slots.
+  4. Copy a whole labeled section to add a new section. Give its heading id and
+  aria-labelledby the same NEW name, such as special-title. IDs must be unique.
+  BOX COLORS: put box-base or box-mode on the whole attack box:
+  <article class="move panel box-base"> or <article class="move panel box-mode">.
+  One class colors its headings, NOTES heading, media frame, and borders.
+  Paragraphs stay neutral. Change the box class when moving between movesets.
+  Set --color-base / --border-base and --color-mode / --border-mode in styles.css.
+  For individual text outside boxes, use color-accent, color-base, or color-mode.
+  5. Put pictures, GIFs, videos, or songs in assets/. See MEDIA HELP below.
+  6. Open styles.css for colors, fonts, spacing, and layout. No tools to install!
+  Keep this HTML, styles.css, and assets/ together when moving the sheet.
+  Comments like this one are little notes. They do not show on the page.
+  -->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Retro fighting-game character concept sheet.">
+    <!-- Browser-tab name: edit the words below. -->
+    <title>Character Name — Character Concept Sheet</title>
+    <!-- Change colors, fonts, and spacing in styles.css. -->
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <!--
+    MEDIA HELP: keep the surrounding div class="media" and replace its span.
+    Picture or GIF: <img src="assets/my-picture.gif" alt="Describe the picture">
+    Video: <video src="assets/my-video.mp4" controls playsinline></video>
+    Song with its own player: <audio src="assets/my-song.mp3" controls></audio>
+    Change each example filename to your file's name. Copy the tag to add media.
+    For a side-by-side layout, use another whole box instead of squeezing media in.
+    Delete the img/video/audio tag to remove it; add a span for placeholder words.
+    Keep a move's media div empty if you want its three-column layout to stay put.
+    To link other files, put <a href="assets/my-file.pdf">Open file</a> in a paragraph.
+    Background music uses the separate MUSIC SOURCE near the end of this file.
+    -->
+    <main class="sheet">
+      <!-- START CHARACTER HEADER: portrait, name, quote, cost, archetype, difficulty. -->
+      <header class="character-header panel">
+        <div class="media portrait">
+          <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+          <span>WIDENED PORTRAIT<br>PLACEHOLDER<br>(PRIMARY CHARACTER ART<br>PANEL)</span>
+        </div>
+        <div class="character-info">
+          <!-- TEXT: edit the name, quote, and facts below. Update the star aria-label too. -->
+          <h1 class="color-accent">CHARACTER NAME</h1>
+          <p class="quote">“Quote Goes Here”</p>
+          <div class="stats" aria-label="Character details">
+            <div class="stat">Cost: <span class="currency">$</span>1000/T100</div>
+            <div class="stat">Archetype: [Archetype Here]</div>
+            <div class="stat">Difficulty: [<span class="difficulty" aria-label="1 out of 5 stars">★☆☆☆☆</span>]</div>
+          </div>
+        </div>
+      </header>
+      <!-- END CHARACTER HEADER -->
+      <!-- START OVERVIEW: edit the headings and paragraphs in the two columns. -->
+      <section class="overview panel" aria-label="Overview">
+        <div class="overview-column">
+          <h3 class="color-accent">CORE SYSTEM</h3>
+          <p>Lorem Ipsum.</p>
+        </div>
+        <div class="overview-column">
+          <h3 class="color-accent">DESIGNER NOTES</h3>
+          <p>Lorem Ipsum.</p>
+        </div>
+      </section>
+      <!-- END OVERVIEW -->
+      <!-- START BASE SECTION: copy through the matching END label. -->
+      <section aria-labelledby="base-title">
+        <div class="section-title">
+          <span class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <h2 id="base-title" class="color-base">BASE MOVESET</h2>
+          <span class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        </div>
+        <!-- Keep all attack boxes inside this list. It spaces them automatically.
+             Delete a whole START BOX through END BOX to close the gap.
+             Paste a copied box before another START BOX or after an END BOX.
+             Keep the list's opening and closing div tags. -->
+        <div class="move-list">
+          <!-- START BOX: UTILITY. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-base" aria-label="UTILITY">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(UTILITY)</span>
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[C] UTILITY</h3>
+              <p>Lorem Ipsum.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>Properties: Lorem Ipsum.</p>
+              <p>Lorem Ipsum.</p>
+            </aside>
+          </article>
+          <!-- END BOX: UTILITY -->
+          <!-- START BOX: PASSIVE. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-base" aria-label="PASSIVE">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(PASSIVE)</span>
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>PASSIVE</h3>
+              <p>Lorem Ipsum.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>Properties: Lorem Ipsum.</p>
+              <p>Lorem Ipsum.</p>
+            </aside>
+          </article>
+          <!-- END BOX: PASSIVE -->
+          <!-- START BOX: Base Move 1. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-base" aria-label="Base Move 1">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(BASE MOVE 1)</span>
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[KEY] MOVE NAME</h3>
+              <p>Lorem Ipsum.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>Properties: Lorem Ipsum.</p>
+              <p>Lorem Ipsum.</p>
+            </aside>
+          </article>
+          <!-- END BOX: Base Move 1 -->
+          <!-- START BOX: Base Move 2. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-base" aria-label="Base Move 2">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(BASE MOVE 2)</span>
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[KEY] MOVE NAME</h3>
+              <p>Lorem Ipsum.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>Properties: Lorem Ipsum.</p>
+              <p>Lorem Ipsum.</p>
+            </aside>
+          </article>
+          <!-- END BOX: Base Move 2 -->
+          <!-- START BOX: Base Move 3. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-base" aria-label="Base Move 3">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(BASE MOVE 3)</span>
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[KEY] MOVE NAME</h3>
+              <p>Lorem Ipsum.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>Properties: Lorem Ipsum.</p>
+              <p>Lorem Ipsum.</p>
+            </aside>
+          </article>
+          <!-- END BOX: Base Move 3 -->
+          <!-- START BOX: Base Move 4. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-base" aria-label="Base Move 4">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(BASE MOVE 4)</span>
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[KEY] MOVE NAME</h3>
+              <p>Lorem Ipsum.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>Properties: Lorem Ipsum.</p>
+              <p>Lorem Ipsum.</p>
+            </aside>
+          </article>
+          <!-- END BOX: Base Move 4 -->
+        </div>
+      </section>
+      <!-- END BASE SECTION -->
+      <!-- START MODE SECTION: copy through the matching END label. -->
+      <section aria-labelledby="mode-title">
+        <div class="section-title">
+          <span class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <h2 id="mode-title" class="color-mode">MODE MOVESET</h2>
+          <span class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        </div>
+        <div class="move-list">
+          <!-- START BOX: Mode Move 1. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-mode" aria-label="Mode Move 1">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(MODE MOVE 1)</span>
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[KEY] MOVE NAME</h3>
+              <p>Lorem Ipsum.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>Properties: Lorem Ipsum.</p>
+              <p>Lorem Ipsum.</p>
+            </aside>
+          </article>
+          <!-- END BOX: Mode Move 1 -->
+          <!-- START BOX: Mode Move 2. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-mode" aria-label="Mode Move 2">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(MODE MOVE 2)</span>
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[KEY] MOVE NAME</h3>
+              <p>Lorem Ipsum.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>Properties: Lorem Ipsum.</p>
+              <p>Lorem Ipsum.</p>
+            </aside>
+          </article>
+          <!-- END BOX: Mode Move 2 -->
+          <!-- START BOX: Mode Move 3. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-mode" aria-label="Mode Move 3">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(MODE MOVE 3)</span>
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[KEY] MOVE NAME</h3>
+              <p>Lorem Ipsum.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>Properties: Lorem Ipsum.</p>
+              <p>Lorem Ipsum.</p>
+            </aside>
+          </article>
+          <!-- END BOX: Mode Move 3 -->
+          <!-- START BOX: Mode Move 4. Copy, move, or delete through END BOX. -->
+          <article class="move panel box-mode" aria-label="Mode Move 4">
+            <div class="media ">
+              <!-- MEDIA: replace the whole span below; see MEDIA HELP at the top of body. -->
+              <span>GIF / IMAGE<br>PLACEHOLDER<br>(MODE MOVE 4)</span>
+            </div>
+            <div class="move-copy">
+              <!-- TEXT: move name and description. Add another p for another paragraph. -->
+              <h3>[KEY] MOVE NAME</h3>
+              <p>Lorem Ipsum.</p>
+            </div>
+            <aside class="move-notes" aria-label="Move notes">
+              <h3>NOTES</h3>
+              <p>Properties: Lorem Ipsum.</p>
+              <p>Lorem Ipsum.</p>
+            </aside>
+          </article>
+          <!-- END BOX: Mode Move 4 -->
+        </div>
+      </section>
+      <!-- END MODE SECTION -->
+      <!-- START CLOSING SECTION: copy through the matching END label. -->
+      <section aria-labelledby="closing-title">
+        <div class="section-title">
+          <span class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <h2 id="closing-title" class="color-accent">CLOSING NOTES</h2>
+          <span class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        </div>
+        <div class="closing panel">
+          <p>Lorem Ipsum.</p>
+          <footer class="signature">♥ Made with love by yours truly</footer>
+        </div>
+      </section>
+      <!-- END CLOSING SECTION -->
+    </main>
+    <!-- MUSIC SOURCE: replace src="" with your audio file path or a data:audio/... URL to keep this file self-contained. -->
+    <audio id="music" loop preload="none"><source src="" type="audio/mpeg"></audio>
+    <button class="music" type="button" aria-controls="music" aria-pressed="false">♪ Music</button>
+    <span class="sr-only" id="music-status" role="status" aria-live="polite"></span>
+    <!-- EXISTING MUSIC BEHAVIOR: no changes needed here to edit your sheet. -->
+    <script>
+    const music = document.getElementById('music');
+    const toggle = document.querySelector('.music');
+    const status = document.getElementById('music-status');
+    toggle.addEventListener('click', async () => {
+      if (!music.paused) {
+        music.pause();
+        toggle.setAttribute('aria-pressed', 'false');
+        toggle.textContent = '♪ Music';
+        return;
+      }
+      if (!music.querySelector('source').getAttribute('src').trim()) {
+        status.textContent = 'Add an audio file to the marked audio source placeholder to enable music.';
+        toggle.title = status.textContent;
+        return;
+      }
+      try {
+        await music.play();
+        toggle.setAttribute('aria-pressed', 'true');
+        toggle.textContent = '♪ Pause';
+        status.textContent = '';
+      } catch {
+        status.textContent = 'Music could not play. Check the audio source.';
+        toggle.title = status.textContent;
+      }
+    });
+  </script>
+  </body>
+</html>
