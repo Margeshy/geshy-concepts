@@ -634,3 +634,19 @@ p {
 .music-content { padding: 0 14px 14px; }
 .music-content h2 { margin-bottom: 12px; }
 .music-content audio { display: block; width: 280px; max-width: 100%; }
+
+/* SHARED HEADING ROW: wrapped move titles and NOTES keep level dividers.
+   The body wrapper keeps paragraphs together below the shared heading row. */
+@media (min-width: 901px) {
+  .move { grid-template-rows: auto 1fr; }
+  .move > .media { grid-row: 1 / 3; }
+  .move-copy, .move-notes {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: 1 / 3;
+    min-width: 0;
+  }
+  .move-copy > h3, .move-notes > h3 {
+    align-content: end;
+  }
+}
