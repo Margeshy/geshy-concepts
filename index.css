@@ -1,6 +1,6 @@
 /* Local fonts: the homepage works without Google Fonts. */
-@font-face { font-family: Pixel; src: url("Titan%20Bash/chars/kong/assets/pixel.ttf") format("truetype"); font-display: swap; }
-@font-face { font-family: Terminal; src: url("Titan%20Bash/chars/kong/assets/terminal.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: Pixel; src: url("rosters/Titan%20Bash/chars/kong/assets/pixel.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: Terminal; src: url("rosters/Titan%20Bash/chars/kong/assets/terminal.ttf") format("truetype"); font-display: swap; }
 
 /* EDIT HERE: shared colors, borders, and fonts. */
 :root {
